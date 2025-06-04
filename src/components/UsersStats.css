@@ -1,0 +1,146 @@
+/* src/components/UsersStats.css */
+.users-stats-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.stat-item {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-sublabel {
+  font-size: 12px;
+  color: #6c757d;
+  margin-top: 4px;
+  font-weight: normal;
+}
+
+.domains-breakdown {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  margin-top: 10px;
+}
+
+.domains-breakdown h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.domains-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.domain-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  transition: background-color 0.2s ease;
+}
+
+.domain-item:hover {
+  background-color: #e9ecef;
+}
+
+.domain-name {
+  font-family: monospace;
+  font-weight: 600;
+  color: #495057;
+}
+
+.domain-count {
+  font-size: 14px;
+  color: #667eea;
+  font-weight: 600;
+  background: rgba(102, 126, 234, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+/* Grid layouts para diferentes tamaños de pantalla */
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+      "stat1 stat2 stat3"
+      "domains domains domains";
+  }
+  
+  .stat-item:nth-child(1) { grid-area: stat1; }
+  .stat-item:nth-child(2) { grid-area: stat2; }
+  .stat-item:nth-child(3) { grid-area: stat3; }
+  .domains-breakdown { grid-area: domains; }
+}
+
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+      "stat1 stat2 stat3 domains";
+  }
+  
+  .domains-breakdown {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .users-stats-card {
+    padding: 20px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .domains-breakdown {
+    padding: 15px;
+  }
+  
+  .domain-item {
+    padding: 8px 12px;
+  }
+}

@@ -1,5 +1,5 @@
 // src/services/authService.ts
-import type  { LoginRequest, LoginResponse, ProtectedResponse } from '../types/auth';
+import type { LoginRequest, LoginResponse, ProtectedResponse, UsersResponse } from '../types/auth';
 
 const API_BASE_URL = 'http://localhost:8000';
 
@@ -39,7 +39,32 @@ class AuthService {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data: ProtectedResponse = await response.json();
+    const data: UsersResponse = await response.json();
+    
+    // Convertir la respuesta de usuarios a un mensaje para mantener compatibilidad
+    return {
+      message: `Se obtuvieron ${data.data.length} usuarios correctamente`
+    };
+  }
+
+  // Nuevo método específico para obtener usuarios
+  async getUsers(token: string): Promise<UsersResponse> {
+    const response = await fetch(`${API_BASE_URL}/users`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Token inválido o expirado');
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data: UsersResponse = await response.json();
     return data;
   }
 }

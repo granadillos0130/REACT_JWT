@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { authService } from '../services/authService';
+import UsersList from './UsersList';
+import UsersStats from './UsersStats';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -73,13 +75,13 @@ const Dashboard = () => {
 
         <div className="protected-data-card">
           <div className="card-header">
-            <h2>Datos del Endpoint Protegido</h2>
+            <h2>Estado del Servidor</h2>
             <button 
               onClick={loadProtectedData} 
               className="refresh-button"
               disabled={isLoading}
             >
-              {isLoading ? 'Cargando...' : 'Actualizar'}
+              {isLoading ? 'Cargando...' : 'Verificar'}
             </button>
           </div>
           
@@ -87,7 +89,7 @@ const Dashboard = () => {
             {isLoading && (
               <div className="loading-spinner">
                 <div className="spinner"></div>
-                <span>Cargando datos...</span>
+                <span>Verificando conexión...</span>
               </div>
             )}
             
@@ -99,7 +101,7 @@ const Dashboard = () => {
             
             {!isLoading && !error && protectedData && (
               <div className="success-message">
-                <strong>Respuesta del servidor:</strong>
+                <strong>✅ Servidor conectado:</strong>
                 <p>{protectedData}</p>
               </div>
             )}
@@ -114,6 +116,16 @@ const Dashboard = () => {
               {token ? `${token.substring(0, 50)}...` : 'No disponible'}
             </div>
           </div>
+        </div>
+
+        {/* Estadísticas de usuarios */}
+        <div className="stats-section">
+          <UsersStats />
+        </div>
+
+        {/* Lista de usuarios */}
+        <div className="users-section">
+          <UsersList />
         </div>
       </div>
     </div>

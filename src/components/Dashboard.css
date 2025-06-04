@@ -245,4 +245,22 @@
     align-items: flex-start;
     gap: 5px;
   }
+  /* Nueva sección para estadísticas y usuarios */
+.stats-section,
+.users-section {
+  grid-column: 1 / -1;
+}
+
+/* Actualizar Responsive Design */
+@media (min-width: 768px) {
+  .dashboard-content {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .token-info-card,
+  .stats-section,
+  .users-section {
+    grid-column: 1 / -1;
+  }
+}
 }

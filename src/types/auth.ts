@@ -4,6 +4,15 @@ export interface User {
   apellido: string;
 }
 
+// Interfaz para usuarios de la base de datos
+export interface DatabaseUser {
+  idusuario: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  password: string;
+}
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -26,4 +35,11 @@ export interface AuthContextType {
 
 export interface ProtectedResponse {
   message: string;
+}
+
+// Nueva interfaz para la respuesta de usuarios
+export interface UsersResponse {
+  msg: string;
+  succes: boolean; // Nota: en el backend está mal escrito como "succes"
+  data: DatabaseUser[];
 }
